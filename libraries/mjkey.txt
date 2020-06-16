@@ -1,0 +1,21 @@
+MuJoCo Pro Lab license activation key, number 6814, type 6.
+
+Issued to Prof. Sami Haddadin, Technical University of Munich.
+
+Expires October 15, 2020.
+
+Do not share this file with anyone other than the users covered
+by your license agreement with Roboti LLC. This file activates
+MuJoCo Pro on any computer running any supported OS.
+
+Do not modify this file. Its entire content, including the
+plain text section, is used by the activation manager.
+
+46da73fd0c348493d2d168c1432b54eecc154635d64cf76424bf288d013c32b5
+f5b6dc25e4a9a06aaff77d2faa8aac453103216cf57610289c82af709ba3d169
+3cbbd21fe3af1a3952ff8d640afe3a9c0f6aae78b2489355c4737fdc7e555ae5
+160de1ab9c007da85b3025619ac043b7ccf4f04f3a62f4c17dcb3d1341442d1c
+0183bc542f16989e27676e38b508354e09bad3acb0e536ffab24885f3a1f0d7c
+2c4ac904d77eee473c823b920efbd7d3b9d70465d0690cb5738e01ca6936f0cd
+3c5aaa08a6c7a60a1a7eda326551bc1dd42577819a96d7ce92ea8b0605ed2ad7
+e83ec5e5b3a4b091cc0ade7fd705d861c9d269873305b4e9c96628fbb607986f

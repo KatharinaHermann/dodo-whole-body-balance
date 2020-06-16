@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC   -shared -Wl,-soname,libutils.so -o libutils.so CMakeFiles/utils.dir/include/uitools.c.o  -L/home/kathi/Documents/Dodo/dodo-whole-body-balance/libraries -Wl,-rpath,/home/kathi/Documents/Dodo/dodo-whole-body-balance/libraries -lGL -lGLU -lglew -lmujoco200 ../libraries/libglfw.so.3 

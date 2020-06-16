@@ -1,0 +1,7 @@
+/home/kathi/Documents/Dodo/dodo-whole-body-balance/build/CMakeFiles/rebuild_cache.dir
+/home/kathi/Documents/Dodo/dodo-whole-body-balance/build/CMakeFiles/eigenUtils.dir
+/home/kathi/Documents/Dodo/dodo-whole-body-balance/build/CMakeFiles/basic.dir
+/home/kathi/Documents/Dodo/dodo-whole-body-balance/build/CMakeFiles/edit_cache.dir
+/home/kathi/Documents/Dodo/dodo-whole-body-balance/build/CMakeFiles/utils.dir
+/home/kathi/Documents/Dodo/dodo-whole-body-balance/build/CMakeFiles/balancerWrench.dir
+/home/kathi/Documents/Dodo/dodo-whole-body-balance/build/CMakeFiles/simulate.dir

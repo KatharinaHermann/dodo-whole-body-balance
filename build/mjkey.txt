@@ -1,0 +1,20 @@
+MuJoCo Pro Personal license activation key, number 72738, type 6.
+
+Issued to NIcolas Seppich <nicolas.seppich@tum.de>.
+
+Expires June 7, 2021.
+
+This file activates MuJoCo Pro on a single computer with id:
+LINUX_nRs_NSs0e48eSSS0E5C8g2a9uirDS14mCJA273
+
+Do not modify this file. Its entire content, including the
+plain text section, is used by the activation manager.
+
+8508d1e20c81f6d7c8b0b08c52c8c37eca4be08324272af483abdb3e5f35e399
+35263d1966e543771285667f67bd19e6b6c074a0e8a6f5ec4631701547f171ee
+37e950d623cc477073a615ed536fca4947e542dc7f56ba65d5e9b51158c13d64
+5158b7234885cc7ff438c907e81ebc1ce4125667f71fa2f75523a5afe18f8cbc
+cefea8fdf438c5fee55f99002230c3b5122fe19f49fba62e603ab29e5cb21652
+71efd7c4aa4bd5c6e33620693cd081c5a0a9cee13235c793412ec1cd9ebf8f6b
+35c615aef62c141fbf6df738e6a44c6bc2bec1e8f79e32e7c6a87a2b4fdd1493
+399d4234f83d4bb16099d23abbb2db79575a31e87fbfe394b720d6c066db42b7

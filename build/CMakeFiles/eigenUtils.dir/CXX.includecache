@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/eigenUtils.h
+eigen3/Eigen/Eigen
+-
+
+/home/kathi/Documents/Dodo/dodo-whole-body-balance/eigen/eigenUtils.cpp
+eigenUtils.h
+/home/kathi/Documents/Dodo/dodo-whole-body-balance/eigen/eigenUtils.h
+

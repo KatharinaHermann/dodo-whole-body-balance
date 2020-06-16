@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11 -pthread   CMakeFiles/basic.dir/sample/basic.cpp.o  -o basic  -L/home/kathi/Documents/Dodo/dodo-whole-body-balance/libraries -Wl,-rpath,/home/kathi/Documents/Dodo/dodo-whole-body-balance/libraries -lmujoco200 -lGL -lGLU -lglew ../libraries/libglfw.so.3 

@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11 -pthread   CMakeFiles/balancerWrench.dir/sample/balancerWrench.cpp.o  -o balancerWrench  -L/home/kathi/Documents/Dodo/dodo-whole-body-balance/libraries -Wl,-rpath,/home/kathi/Documents/Dodo/dodo-whole-body-balance/libraries:/home/kathi/Documents/Dodo/dodo-whole-body-balance/build -lmujoco200 -lGL -lGLU -lglew ../libraries/libglfw.so.3 libeigenUtils.so 
