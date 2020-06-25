@@ -128,10 +128,29 @@ void controllerCallback(const mjModel* m, mjData* d)
     else {
 
         //Initialization
-        const double gravity = 9.81;
-        Vector3d gravity_vector(0,0, gravity);
+
 
         //1st step PD like controller
+
+        const double gravity = 9.81;
+        Vector3d gravity_vector(0,0, gravity);
+        MatrixXd K_t = MatrixXd::Zero(3, 3);
+        K_t << 100.0, 0, 0,
+             0, 100.0, 0,
+            0, 0, 100.0;
+        MatrixXd D_t = MatrixXd::Zero(3, 3);
+        D_t << 1.0, 0, 0,
+             0, 1.0, 0,
+            0, 0, 1.0;
+        MatrixXd K_r = MatrixXd::Zero(3, 3);
+        K_r << 100.0, 0, 0,
+             0, 100.0, 0,
+            0, 0, 100.0;
+        MatrixXd D_r = MatrixXd::Zero(3, 3);
+        D_r << 1.0, 0, 0,
+             0, 1.0, 0,
+            0, 0, 1.0;
+
         VectorXd x_COM_desired = VectorXd::Zero(3); //Desired COM position
         VectorXd x_COM = VectorXd::Zero(3); //Whole body COM position
 
@@ -140,7 +159,10 @@ void controllerCallback(const mjModel* m, mjData* d)
         Quaterniond Q_b; //the current orientation of frame b
         Quaterniond Q_b_desired; //the desired orientation of frame b
 
-        VectorXd omega_b = VectorXd::Zero(3);
+        VectorXd w_b = VectorXd::Zero(3);
+        VectorXd w_b_desired = VectorXd::Zero(3); //Is initialized as zero and stays zero as the angular velocity should be 0 for the quasi static case.
+        VectorXd e_or = VectorXd::Zero(3);
+        VectorXd edot_or = VectorXd::Zero(3);
         MatrixXd R_b = MatrixXd::Zero(3,3);
 
         VectorXd f_COM = VectorXd::Zero(3); //ground applied force
@@ -150,6 +172,7 @@ void controllerCallback(const mjModel* m, mjData* d)
 
         //Auxiliary variables for final equation 1
         VectorXd x_COMi = VectorXd::Zero(3); // COM position of body i
+        VectorXd x_COMi_des = VectorXd::Zero(3); // COM position of body i
         VectorXd dq = VectorXd::Zero(m->nv); //velocity of the degrees of freedom
 
 
@@ -160,14 +183,15 @@ void controllerCallback(const mjModel* m, mjData* d)
 
 
         VectorXd f_k = VectorXd::Zero(3); //contact force
-        VectorXd m_k= VectorXd::Zero(3); //contact moment
+        VectorXd m_k = VectorXd::Zero(3); //contact moment
 
         VectorXd F_k = VectorXd::Zero(6); //contact wrench
 
         //Auxiliary variables for final equation 2
         VectorXd x_k = VectorXd::Zero(3); //Vector from W to the contact point k
         VectorXd x_COM_k = VectorXd::Zero(3); //Vector from COM to the contact point k
-        MatrixXd x_COM_k_skew= MatrixXd::Zero(3, 3);
+        MatrixXd x_COM_k_skew = MatrixXd::Zero(3, 3);
+        MatrixXd GG_T= MatrixXd::Zero(3, 3);
 
 
         //3rd step wit tau=J_T*F_k
@@ -194,6 +218,28 @@ void controllerCallback(const mjModel* m, mjData* d)
 
         //Implementation
 
+        //Calculating the desired variables
+
+        //Desired COM position
+        if(steps == 200){
+            for (int i=1; i< m->nbody; i++) {//We start at i=1 since i=0 is the world frame
+                //Calculate COM position
+                x_COMi_des = Map<VectorXd> (d->subtree_com+3*i, 3);
+                x_COM_desired += (m->body_mass[i] * x_COMi_des);
+            }
+            x_COM_desired /= mj_getTotalmass(m);
+
+            steps++;
+        }
+
+        //Desired base orientation
+        Q_b_desired.w() = m->qpos0[3];
+        Q_b_desired.x() = m->qpos0[4];
+        Q_b_desired.y() = m->qpos0[5];
+        Q_b_desired.z() = m->qpos0[6];
+
+
+
         mjMARKSTACK
         //Basics and variables for Equation 1
 
@@ -219,13 +265,15 @@ void controllerCallback(const mjModel* m, mjData* d)
             dq = Map<VectorXd>(d->qvel,m->nv);
             v_COM = J_COM *dq;
 
-
             //Compute Quaternions for current base orientation
-            Q_b.w() = d->xquat[torso_id* 4];
-            Q_b.x() = d->xquat[torso_id* 4 +1];
-            Q_b.y() = d->xquat[torso_id* 4 +2];
-            Q_b.z() = d->xquat[torso_id* 4 +3];
+            Q_b.w() = d->qpos[3];
+            Q_b.x() = d->qpos[4];
+            Q_b.y() = d->qpos[5];
+            Q_b.z() = d->qpos[6];
             Q_b.normalize();
+
+            //Compute the current base velocity
+            w_b = Map<VectorXd>(d->qvel+3, 3);
 
         //Variables for Equation 2
             //Contact point 1
@@ -234,15 +282,15 @@ void controllerCallback(const mjModel* m, mjData* d)
 
             x_COM_k_skew = eigenUtils::skewSymmetric(x_COM_k);
             G.block(0,0,6,6) = MatrixXd::Identity(3,3);
-            G.block(3,0,6,3) = x_COM_k_skew;
+            G.block(3,0,3,3) = x_COM_k_skew;
 
             //Contact point 2
             x_k = Map<VectorXd>(d->xpos+contact_point_1*3, 3);
             x_COM_k = x_k - x_COM;
 
             x_COM_k_skew = eigenUtils::skewSymmetric(x_COM_k);
-            G.block(0,6,6,12) = MatrixXd::Identity(3,3);
-            G.block(3,6,6,9) = x_COM_k_skew;
+            G.block(0,6,6,6) = MatrixXd::Identity(3,3);
+            G.block(3,6,3,3) = x_COM_k_skew;
 
         //Variables for Equation 3
             // Compute the Jacobian J_b_COM from the base in "torso" b to COM.
@@ -272,15 +320,33 @@ void controllerCallback(const mjModel* m, mjData* d)
 
             J_COM_k.block(0,0,3, m->nv) = J_bk_trans - J_b_COM;
             J_COM_k.block(3,0,3, m->nv) = J_bk_rot;
-            J_COM_K.block(6,0,12, m->nv) = J_COM_k;
+            J_COM_K.block(6,0,6, m->nv) = J_COM_k;
 
+        mjFREESTACK
+                
+                
+        //Final calculations
 
+        //First step
+        f_COM = mj_getTotalmass(m) * gravity_vector + K_t*(x_COM - x_COM_desired) + D_t * v_COM;
 
+        eigenUtils::virtualSpringPD(m_COM, e_or, edot_or, Q_b, Q_b_desired, w_b,  w_b_desired, K_r, D_r);
+        F_COM.head(3) = f_COM;
+        F_COM.tail(3) = m_COM;
 
-            mjFREESTACK
+        //Second step
+        GG_T = G* G.transpose();
 
+        G_PI = G.transpose()* GG_T.inverse();
+        F_k= G_PI * F_COM;
 
+        //Third step
+        J_COM_K_T= J_COM_K.transpose();
+        tau = J_COM_K_T*F_k;
 
+        for(int i=0;i < m->nu; i++) {
+            d->qfrc_applied[i+6] = tau(i);
+            }
 
     }
 
