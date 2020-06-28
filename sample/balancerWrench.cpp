@@ -41,6 +41,9 @@ bool firstLoop = true;
 bool pushNow = true;
 
 
+//Steps for switching tto balancer mode
+int steps =0;
+
 // keyboard callback
 void keyboard(GLFWwindow* window, int key, int scancode, int act, int mods)
 {
@@ -114,20 +117,25 @@ void controllerCallback(const mjModel* m, mjData* d)
 {
 
     using namespace Eigen;
-    int steps;
+    using namespace std;
     //We only use that in order to place the Dodo in the first frame steps stabilized on the ground
 
     if(steps < 200){
-
         for(int i=0;i < m->nu; i++) {
                 d->qfrc_applied[i+6]= 100.0*(m->qpos0[i+7] - d->qpos[i+7]) - 1.0*d->qvel[i+6] + d->qfrc_bias[i+6];
         }
     steps++;
+    cout<<steps<<endl;
     }
 
     else {
 
         //Initialization
+        //Constants
+        const int number_contact_points = 2;
+        const int contact_point_1 = mj_name2id(m,mjOBJ_BODY,"right_foot");
+        const int contact_point_2 = mj_name2id(m,mjOBJ_BODY,"left_foot");
+        const int torso_id = mj_name2id(m,mjOBJ_BODY,"torso");
 
 
         //1st step PD like controller
@@ -177,7 +185,6 @@ void controllerCallback(const mjModel* m, mjData* d)
 
 
         //2nd step for force distribution with F_k= G_PI *F_COM
-        const int number_contact_points = 2;
         MatrixXd G = MatrixXd::Zero(6, number_contact_points*6); //Contact map
         MatrixXd G_PI = MatrixXd::Zero(number_contact_points*6, 6); //Pseudo inversecontact map
 
@@ -211,10 +218,6 @@ void controllerCallback(const mjModel* m, mjData* d)
         MatrixXd J_bk_rot = MatrixXd::Zero(3, m->nv); //Rotational part of Com to endeffector k Jacobian with shape 3x number of degrees of freedom
         MatrixXd J_COM_k = MatrixXd::Zero(6, m->nv); //Com to endeffector k Jacobian in W frame with shape 6x number of degrees of freedom
 
-        //Constants
-        const int contact_point_1 = mj_name2id(m,mjOBJ_BODY,"right_foot");
-        const int contact_point_2 = mj_name2id(m,mjOBJ_BODY,"left_foot");
-        const int torso_id = mj_name2id(m,mjOBJ_BODY,"torso");
 
         //Implementation
 
@@ -230,6 +233,8 @@ void controllerCallback(const mjModel* m, mjData* d)
             x_COM_desired /= mj_getTotalmass(m);
 
             steps++;
+            cout<<x_COM_desired<<endl;
+            cout<<steps<<endl;
         }
 
         //Desired base orientation
@@ -237,8 +242,6 @@ void controllerCallback(const mjModel* m, mjData* d)
         Q_b_desired.x() = m->qpos0[4];
         Q_b_desired.y() = m->qpos0[5];
         Q_b_desired.z() = m->qpos0[6];
-
-
 
         mjMARKSTACK
         //Basics and variables for Equation 1
@@ -281,7 +284,7 @@ void controllerCallback(const mjModel* m, mjData* d)
             x_COM_k = x_k - x_COM;
 
             x_COM_k_skew = eigenUtils::skewSymmetric(x_COM_k);
-            G.block(0,0,6,6) = MatrixXd::Identity(3,3);
+            G.block(0,0,6,6) = MatrixXd::Identity(6,6);
             G.block(3,0,3,3) = x_COM_k_skew;
 
             //Contact point 2
@@ -289,7 +292,7 @@ void controllerCallback(const mjModel* m, mjData* d)
             x_COM_k = x_k - x_COM;
 
             x_COM_k_skew = eigenUtils::skewSymmetric(x_COM_k);
-            G.block(0,6,6,6) = MatrixXd::Identity(3,3);
+            G.block(0,6,6,6) = MatrixXd::Identity(6,6);
             G.block(3,6,3,3) = x_COM_k_skew;
 
         //Variables for Equation 3
@@ -323,6 +326,8 @@ void controllerCallback(const mjModel* m, mjData* d)
             J_COM_K.block(6,0,6, m->nv) = J_COM_k;
 
         mjFREESTACK
+                
+                
         //Final calculations
 
         //First step
@@ -343,15 +348,13 @@ void controllerCallback(const mjModel* m, mjData* d)
         tau = J_COM_K_T*F_k;
 
         for(int i=0;i < m->nu; i++) {
-            d->qfrc_applied[i+6]= tau(i);
+            d->qfrc_applied[i+6] = tau(i);
             }
 
     }
 
 
 }
-
-
 
 
 // main function
