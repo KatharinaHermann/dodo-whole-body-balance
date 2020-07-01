@@ -143,21 +143,17 @@ void controllerCallback(const mjModel* m, mjData* d)
         const double gravity = 9.81;
         Vector3d gravity_vector(0,0, gravity);
         MatrixXd K_t = MatrixXd::Zero(3, 3);
-        K_t << 100.0, 0, 0,
-             0, 100.0, 0,
+        K_t << 80.0, 0, 0,
+             0, 80.0, 0,
             0, 0, 100.0;
         MatrixXd D_t = MatrixXd::Zero(3, 3);
-        D_t << 1.0, 0, 0,
-             0, 1.0, 0,
-            0, 0, 1.0;
+        D_t << 5.0, 0, 0,
+             0, 5.0, 0,
+            0, 0, 40.0;
         MatrixXd K_r = MatrixXd::Zero(3, 3);
-        K_r << 100.0, 0, 0,
-             0, 100.0, 0,
-            0, 0, 100.0;
+        K_r = 100.0f * MatrixXd::Identity(3,3);
         MatrixXd D_r = MatrixXd::Zero(3, 3);
-        D_r << 1.0, 0, 0,
-             0, 1.0, 0,
-            0, 0, 1.0;
+        D_r = 1.0f * MatrixXd::Identity(3,3);
 
         VectorXd x_COM_desired = VectorXd::Zero(3); //Desired COM position
         VectorXd x_COM = VectorXd::Zero(3); //Whole body COM position
@@ -232,16 +228,18 @@ void controllerCallback(const mjModel* m, mjData* d)
             }
             x_COM_desired /= mj_getTotalmass(m);
 
-            steps++;
             cout<<x_COM_desired<<endl;
             cout<<steps<<endl;
+
+            //Desired base orientation
+            Q_b_desired.w() = d->qpos[3];
+            Q_b_desired.x() = d->qpos[4];
+            Q_b_desired.y() = d->qpos[5];
+            Q_b_desired.z() = d->qpos[6];
+
+            steps++;
         }
 
-        //Desired base orientation
-        Q_b_desired.w() = m->qpos0[3];
-        Q_b_desired.x() = m->qpos0[4];
-        Q_b_desired.y() = m->qpos0[5];
-        Q_b_desired.z() = m->qpos0[6];
 
         mjMARKSTACK
         //Basics and variables for Equation 1
@@ -288,7 +286,7 @@ void controllerCallback(const mjModel* m, mjData* d)
             G.block(3,0,3,3) = x_COM_k_skew;
 
             //Contact point 2
-            x_k = Map<VectorXd>(d->xpos+contact_point_1*3, 3);
+            x_k = Map<VectorXd>(d->xpos+contact_point_2*3, 3);
             x_COM_k = x_k - x_COM;
 
             x_COM_k_skew = eigenUtils::skewSymmetric(x_COM_k);
@@ -302,8 +300,6 @@ void controllerCallback(const mjModel* m, mjData* d)
             J_b = Map<MatrixXd>(J_b_temp, 3, m->nv);
             J_b_COM = J_COM - J_b;
 
-
-            //mjtNum* temp_J = mj_stackAlloc(d, 3*m->nv);
             mjtNum* J_bk_trans_temp = mj_stackAlloc(d, 3*m->nv);
             mjtNum* J_bk_rot_temp = mj_stackAlloc(d, 3*m->nv);
 
@@ -331,24 +327,27 @@ void controllerCallback(const mjModel* m, mjData* d)
         //Final calculations
 
         //First step
-        f_COM = mj_getTotalmass(m) * gravity_vector + K_t*(x_COM - x_COM_desired) + D_t * v_COM;
-
+        f_COM = mj_getTotalmass(m) * gravity_vector - K_t* (x_COM - x_COM_desired) - D_t * v_COM;
         eigenUtils::virtualSpringPD(m_COM, e_or, edot_or, Q_b, Q_b_desired, w_b,  w_b_desired, K_r, D_r);
+
         F_COM.head(3) = f_COM;
         F_COM.tail(3) = m_COM;
 
         //Second step
-        GG_T = G* G.transpose();
+        //Pseudo inverse
+        F_k = G.bdcSvd(ComputeThinU | ComputeThinV).solve(F_COM);
 
-        G_PI = G.transpose()* GG_T.inverse();
-        F_k= G_PI * F_COM;
+        // GG_T = G* G.transpose();
+
+        //G_PI = G.transpose()* GG_T.inverse();
+        //F_k= G_PI * F_COM;
 
         //Third step
         J_COM_K_T= J_COM_K.transpose();
-        tau = J_COM_K_T*F_k;
+        tau = J_COM_K_T * F_k;
 
         for(int i=0;i < m->nu; i++) {
-            d->qfrc_applied[i+6] = tau(i);
+            d->qfrc_applied[i+6] = tau(i+6);
             }
 
     }
