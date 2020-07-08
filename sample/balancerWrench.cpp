@@ -123,6 +123,7 @@ void controllerCallback(const mjModel* m, mjData* d)
     if(steps < 200){
         for(int i=0;i < m->nu; i++) {
                 d->qfrc_applied[i+6]= 100.0*(m->qpos0[i+7] - d->qpos[i+7]) - 1.0*d->qvel[i+6] + d->qfrc_bias[i+6];
+
         }
     steps++;
     cout<<steps<<endl;
@@ -225,7 +226,6 @@ void controllerCallback(const mjModel* m, mjData* d)
             x_COM_desired /= mj_getTotalmass(m);
 
             cout<<x_COM_desired<<endl;
-            cout<<steps<<endl;
 
             //Desired base orientation
             Q_b_desired.w() = d->qpos[3];
@@ -234,7 +234,11 @@ void controllerCallback(const mjModel* m, mjData* d)
             Q_b_desired.z() = d->qpos[6];
 
             steps++;
+            cout<<steps<<endl;
         }
+
+        steps++;
+        cout<<steps<<endl;
 
         mjMARKSTACK
         //Basics and variables for Equation 1
@@ -347,6 +351,29 @@ void controllerCallback(const mjModel* m, mjData* d)
         for(int i=0;i < m->nu; i++) {
             d->qfrc_applied[i+6] = tau(i+6);
             }
+
+        //Applying forces in x and y direction and a moment around x
+
+        if(steps > 1500){
+            d->qfrc_applied[1]=51.0;
+        }
+
+        if(steps > 2500){
+            d->qfrc_applied[1]=0.0;
+        }
+
+        if(steps > 3500){
+            d->qfrc_applied[4]=36.0;
+        }
+
+        if(steps > 4500){
+            d->qfrc_applied[4]=0.0;
+        }
+
+        if(steps > 5500){
+            d->qfrc_applied[2]=193.0;
+        }
+
 
     }
 
