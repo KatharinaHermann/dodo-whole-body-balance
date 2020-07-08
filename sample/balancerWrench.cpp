@@ -145,11 +145,11 @@ void controllerCallback(const mjModel* m, mjData* d)
         MatrixXd K_t = MatrixXd::Zero(3, 3);
         K_t << 80.0, 0, 0,
              0, 80.0, 0,
-            0, 0, 100.0;
+            0, 0, 10000.0;
         MatrixXd D_t = MatrixXd::Zero(3, 3);
         D_t << 5.0, 0, 0,
              0, 5.0, 0,
-            0, 0, 40.0;
+            0, 0, 400.0;
         MatrixXd K_r = MatrixXd::Zero(3, 3);
         K_r = 100.0f * MatrixXd::Identity(3,3);
         MatrixXd D_r = MatrixXd::Zero(3, 3);
@@ -184,17 +184,13 @@ void controllerCallback(const mjModel* m, mjData* d)
         MatrixXd G = MatrixXd::Zero(6, number_contact_points*6); //Contact map
         MatrixXd G_PI = MatrixXd::Zero(number_contact_points*6, 6); //Pseudo inversecontact map
 
-
-        VectorXd f_k = VectorXd::Zero(3); //contact force
-        VectorXd m_k = VectorXd::Zero(3); //contact moment
-
         VectorXd F_k = VectorXd::Zero(6); //contact wrench
 
         //Auxiliary variables for final equation 2
         VectorXd x_k = VectorXd::Zero(3); //Vector from W to the contact point k
         VectorXd x_COM_k = VectorXd::Zero(3); //Vector from COM to the contact point k
         MatrixXd x_COM_k_skew = MatrixXd::Zero(3, 3);
-        MatrixXd GG_T= MatrixXd::Zero(3, 3);
+        MatrixXd G_T= MatrixXd::Zero(3, 3);
 
 
         //3rd step wit tau=J_T*F_k
@@ -240,7 +236,6 @@ void controllerCallback(const mjModel* m, mjData* d)
             steps++;
         }
 
-
         mjMARKSTACK
         //Basics and variables for Equation 1
 
@@ -254,7 +249,7 @@ void controllerCallback(const mjModel* m, mjData* d)
 
                 //Calculate J_COMi
                 mj_jacBody(m, d, J_COMi_temp, NULL, i);
-                J_COMi = Map<MatrixXd>(J_COMi_temp, 3, m->nv);
+                J_COMi = Map<Matrix<double, Dynamic, Dynamic, RowMajor>>(J_COMi_temp, 3, m->nv);
                 J_COM += (m->body_mass[i] * J_COMi);
             }
 
@@ -281,23 +276,26 @@ void controllerCallback(const mjModel* m, mjData* d)
             x_k = Map<VectorXd>(d->xpos+contact_point_1*3, 3);
             x_COM_k = x_k - x_COM;
 
-            x_COM_k_skew = eigenUtils::skewSymmetric(x_COM_k);
-            G.block(0,0,6,6) = MatrixXd::Identity(6,6);
-            G.block(3,0,3,3) = x_COM_k_skew;
+            G.block(0,0,6,6) = eigenUtils::adjointTransformation(x_COM_k, MatrixXd::Identity(3,3));
+
+            //x_COM_k_skew = eigenUtils::skewSymmetric(x_COM_k);
+            //G.block(0,0,6,6) = MatrixXd::Identity(6,6);
+            //G.block(3,0,3,3) = x_COM_k_skew;
 
             //Contact point 2
             x_k = Map<VectorXd>(d->xpos+contact_point_2*3, 3);
             x_COM_k = x_k - x_COM;
 
-            x_COM_k_skew = eigenUtils::skewSymmetric(x_COM_k);
-            G.block(0,6,6,6) = MatrixXd::Identity(6,6);
-            G.block(3,6,3,3) = x_COM_k_skew;
+            G.block(0,6,6,6) = eigenUtils::adjointTransformation(x_COM_k, MatrixXd::Identity(3,3));
+            //x_COM_k_skew = eigenUtils::skewSymmetric(x_COM_k);
+            //G.block(0,6,6,6) = MatrixXd::Identity(6,6);
+            //G.block(3,6,3,3) = x_COM_k_skew;
 
         //Variables for Equation 3
             // Compute the Jacobian J_b_COM from the base in "torso" b to COM.
             mjtNum* J_b_temp = mj_stackAlloc(d, 3*m->nv);
             mj_jacBody(m, d, J_b_temp, NULL, torso_id );
-            J_b = Map<MatrixXd>(J_b_temp, 3, m->nv);
+            J_b = Map<Matrix<double, Dynamic, Dynamic, RowMajor>>(J_b_temp, 3, m->nv);
             J_b_COM = J_COM - J_b;
 
             mjtNum* J_bk_trans_temp = mj_stackAlloc(d, 3*m->nv);
@@ -305,8 +303,8 @@ void controllerCallback(const mjModel* m, mjData* d)
 
             //Contact point 1
             mj_jacBody(m, d, J_bk_trans_temp, J_bk_rot_temp, contact_point_1);
-            J_bk_trans = Map<MatrixXd>(J_bk_trans_temp, 3, m->nv);
-            J_bk_rot = Map<MatrixXd>(J_bk_rot_temp, 3, m->nv);
+            J_bk_trans = Map<Matrix<double, Dynamic, Dynamic, RowMajor>>(J_bk_trans_temp, 3, m->nv);
+            J_bk_rot = Map<Matrix<double, Dynamic, Dynamic, RowMajor>>(J_bk_rot_temp, 3, m->nv);
 
             J_COM_k.block(0,0,3, m->nv) = J_bk_trans - J_b_COM;
             J_COM_k.block(3,0,3, m->nv) = J_bk_rot;
@@ -314,8 +312,8 @@ void controllerCallback(const mjModel* m, mjData* d)
 
             //Contact point _2
             mj_jacBody(m, d, J_bk_trans_temp, J_bk_rot_temp, contact_point_2);
-            J_bk_trans = Map<MatrixXd>(J_bk_trans_temp, 3, m->nv);
-            J_bk_rot = Map<MatrixXd>(J_bk_rot_temp, 3, m->nv);
+            J_bk_trans = Map<Matrix<double, Dynamic, Dynamic, RowMajor>>(J_bk_trans_temp, 3, m->nv);
+            J_bk_rot = Map<Matrix<double, Dynamic, Dynamic, RowMajor>>(J_bk_rot_temp, 3, m->nv);
 
             J_COM_k.block(0,0,3, m->nv) = J_bk_trans - J_b_COM;
             J_COM_k.block(3,0,3, m->nv) = J_bk_rot;
