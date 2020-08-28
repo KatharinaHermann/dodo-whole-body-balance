@@ -346,8 +346,6 @@ void controllerCallback(const mjModel* m, mjData* d)
         //--------------------------------
 
         //solving F_k with osqp-eigen QP optimization
-
-
         MatrixXd Q = MatrixXd::Zero(6,6);
         Q = 38.0f * MatrixXd::Identity(6,6);
 
@@ -360,15 +358,12 @@ void controllerCallback(const mjModel* m, mjData* d)
         VectorXd q = VectorXd::Zero(12);
         q=(G.transpose())*Q*F_COM;
 
-
-
         VectorXd u = VectorXd::Zero(6);
         u << 10000000, 0, 10000000, 10000000, 0, 10000000;
         VectorXd l = VectorXd::Zero(6);
         l << 0, -10000000, 0, 0, -10000000, 0;
 
         const double my = 0.1;
-
         SparseMatrix<float> A(6,12);
         A.insert(0,2) = 1;
         A.insert(3,8) = 1;
@@ -401,9 +396,7 @@ void controllerCallback(const mjModel* m, mjData* d)
         solver.data()->setLowerBound(l);
 
         solver.initSolver();
-
         solver.solve();
-
         F_k = -1*(solver.getSolution());
 
 
