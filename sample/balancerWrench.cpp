@@ -386,7 +386,6 @@ void controllerCallback(const mjModel* m, mjData* d)
 
         OsqpEigen::Solver solver;
         //solver.settings()->setWarmStart(true);
-
         solver.data()->setNumberOfVariables(12);
         solver.data()->setNumberOfConstraints(6);
         solver.data()->setHessianMatrix(P_S);
