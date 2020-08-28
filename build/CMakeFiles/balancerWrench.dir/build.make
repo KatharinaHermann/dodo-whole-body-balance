@@ -93,6 +93,8 @@ balancerWrench: CMakeFiles/balancerWrench.dir/build.make
 balancerWrench: ../libraries/libmujoco200.so
 balancerWrench: ../libraries/libglfw.so.3
 balancerWrench: libeigenUtils.so
+balancerWrench: /usr/local/lib/libOsqpEigen.so.0.6.1
+balancerWrench: /usr/local/lib/libosqp.so
 balancerWrench: CMakeFiles/balancerWrench.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kathi/Documents/Dodo/dodo-whole-body-balance/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable balancerWrench"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/balancerWrench.dir/link.txt --verbose=$(VERBOSE)

@@ -211,6 +211,9 @@ OPENGL_opengl_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libOpenGL.so
 //Path to a file.
 OPENGL_xmesa_INCLUDE_DIR:PATH=OPENGL_xmesa_INCLUDE_DIR-NOTFOUND
 
+//The directory containing a CMake configuration file for OsqpEigen.
+OsqpEigen_DIR:PATH=/usr/local/lib/cmake/OsqpEigen
+
 //Value Computed by CMake
 Project_BINARY_DIR:STATIC=/home/kathi/Documents/Dodo/dodo-whole-body-balance/build
 
@@ -222,6 +225,9 @@ RUN_X11_TESTS:BOOL=OFF
 
 //Dependencies for target
 eigenUtils_LIB_DEPENDS:STATIC=
+
+//The directory containing a CMake configuration file for osqp.
+osqp_DIR:PATH=/usr/local/lib/cmake/osqp
 
 //Dependencies for the target
 utils_LIB_DEPENDS:STATIC=general;GL;general;GLU;general;glew;general;/home/kathi/Documents/Dodo/dodo-whole-body-balance/libraries/libmujoco200.so;general;/home/kathi/Documents/Dodo/dodo-whole-body-balance/libraries/libglfw.so.3;

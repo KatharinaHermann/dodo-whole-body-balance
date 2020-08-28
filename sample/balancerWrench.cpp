@@ -20,6 +20,7 @@
 #include <eigen3/Eigen/Core>
 #include <eigen3/Eigen/Dense>
 #include <vector>
+#include "OsqpEigen/OsqpEigen.h"
 
 
 // MuJoCo data structures
@@ -120,7 +121,7 @@ void controllerCallback(const mjModel* m, mjData* d)
     using namespace std;
     //We only use that in order to place the Dodo in the first frame steps stabilized on the ground
 
-    if(steps < 200){
+    if(steps < 500){
         for(int i=0;i < m->nu; i++) {
                 d->qfrc_applied[i+6]= 100.0*(m->qpos0[i+7] - d->qpos[i+7]) - 1.0*d->qvel[i+6] + d->qfrc_bias[i+6];
 
@@ -217,7 +218,7 @@ void controllerCallback(const mjModel* m, mjData* d)
         //Calculating the desired variables
 
         //Desired COM position
-        if(steps == 200){
+        if(steps == 500){
             for (int i=1; i< m->nbody; i++) {//We start at i=1 since i=0 is the world frame
                 //Calculate COM position
                 x_COMi_des = Map<VectorXd> (d->subtree_com+3*i, 3);
@@ -237,8 +238,9 @@ void controllerCallback(const mjModel* m, mjData* d)
             cout<<steps<<endl;
         }
 
-        steps++;
-        cout<<steps<<endl;
+//        if(steps > 7500){
+//            x_COM_desired[1] = x_COM_desired[1]+(steps-7500)*1.0;
+//        }
 
         mjMARKSTACK
         //Basics and variables for Equation 1
@@ -336,16 +338,96 @@ void controllerCallback(const mjModel* m, mjData* d)
         F_COM.tail(3) = m_COM;
 
         //Second step
+
+
         //Pseudo inverse
-        F_k = G.bdcSvd(ComputeThinU | ComputeThinV).solve(F_COM);
+        //F_k = G.bdcSvd(ComputeThinU | ComputeThinV).solve(F_COM);
 
-        // GG_T = G* G.transpose();
+        //--------------------------------
 
-        //G_PI = G.transpose()* GG_T.inverse();
-        //F_k= G_PI * F_COM;
+        //solving F_k with osqp-eigen QP optimization
+
+
+        MatrixXd Q = MatrixXd::Zero(6,6);
+        Q = 38.0f * MatrixXd::Identity(6,6);
+
+        MatrixXd P = MatrixXd::Zero(12,12);
+        P = (G.transpose())*Q* G + 85*MatrixXd::Identity(12,12);
+
+        SparseMatrix<double> P_S(12,12);
+        P_S = P.sparseView();
+
+        VectorXd q = VectorXd::Zero(12);
+        //q=(F_COM.transpose())*Q*G;
+        q=(G.transpose())*Q*F_COM;
+
+        /*
+        VectorXd u = VectorXd::Zero(4);
+        u << 10000, 10000, 0, 0;
+
+        VectorXd l = VectorXd::Zero(4);
+        l << 0, 0, -10000, -10000;
+
+        const double my = 0.1;
+
+        SparseMatrix<float> A(4,12);
+        A.insert(0,2) = 1;
+        A.insert(1,8) = 1;
+        A.insert(2,0) = 1;
+        A.insert(2,1) = 1;
+        A.insert(2,2) = -0.1;
+        A.insert(3,6) = 1;
+        A.insert(3,7) = 1;
+        A.insert(3,8) = -0.1;
+        */
+
+        VectorXd u = VectorXd::Zero(6);
+        u << 10000000, 0, 10000000, 10000000, 0, 10000000;
+        VectorXd l = VectorXd::Zero(6);
+        l << 0, -10000000, 0, 0, -10000000, 0;
+
+        const double my = 0.1;
+
+        SparseMatrix<float> A(6,12);
+        A.insert(0,2) = 1;
+        A.insert(3,8) = 1;
+
+        A.insert(1,0) = 1;
+        A.insert(1,1) = 1;
+        A.insert(1,2) = -my; //-0.07071;
+
+        A.insert(4,6) = 1;
+        A.insert(4,7) = 1;
+        A.insert(4,8) = -my;
+
+        A.insert(2,0) = 1;
+        A.insert(2,1) = 1;
+        A.insert(2,2) = my;
+
+        A.insert(5,6) = 1;
+        A.insert(5,7) = 1;
+        A.insert(5,8) = my;
+
+        OsqpEigen::Solver solver;
+        //solver.settings()->setWarmStart(true);
+
+        solver.data()->setNumberOfVariables(12);
+        solver.data()->setNumberOfConstraints(6);
+        solver.data()->setHessianMatrix(P_S);
+        solver.data()->setGradient(q);
+        solver.data()->setLinearConstraintsMatrix(A);
+        solver.data()->setUpperBound(u);
+        solver.data()->setLowerBound(l);
+
+        solver.initSolver();
+
+        solver.solve();
+
+        F_k = -1*(solver.getSolution());
+
 
         //Third step
-        J_COM_K_T= J_COM_K.transpose();
+        J_COM_K_T = J_COM_K.transpose();
         tau = J_COM_K_T * F_k;
 
         for(int i=0;i < m->nu; i++) {
@@ -354,25 +436,35 @@ void controllerCallback(const mjModel* m, mjData* d)
 
         //Applying forces in x and y direction and a moment around x
 
-        if(steps > 1500){
-            d->qfrc_applied[1]=51.0;
-        }
-
         if(steps > 2500){
-            d->qfrc_applied[1]=0.0;
+            d->qfrc_applied[1]=27;
         }
 
         if(steps > 3500){
-            d->qfrc_applied[4]=36.0;
+            d->qfrc_applied[1]=0.0;
         }
 
         if(steps > 4500){
-            d->qfrc_applied[4]=0.0;
+            d->qfrc_applied[4]=9.0;
         }
 
         if(steps > 5500){
-            d->qfrc_applied[2]=193.0;
+            d->qfrc_applied[4]=0.0;
         }
+
+        if(steps > 6500){
+            d->qfrc_applied[2]=215.0;
+        }
+
+
+        if(steps > 7500){
+            d->qfrc_applied[2]=0.0;
+        }
+
+
+
+        steps++;
+        cout<<steps<<endl;
 
 
     }

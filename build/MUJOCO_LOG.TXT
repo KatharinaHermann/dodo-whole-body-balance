@@ -76,3 +76,369 @@ WARNING: Nan, Inf or huge value in QACC at DOF 17. The simulation is unstable. T
 Wed Jul  8 11:18:31 2020
 WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 31.4300.
 
+Wed Jul  8 13:00:08 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 17. The simulation is unstable. Time = 12.0650.
+
+Wed Jul  8 13:02:24 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 9.0050.
+
+Wed Jul  8 13:08:26 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 20.0250.
+
+Wed Jul  8 13:09:18 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 23.6750.
+
+Wed Jul  8 13:11:07 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 30.9500.
+
+Wed Jul  8 13:12:26 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 30.9500.
+
+Wed Jul  8 13:13:29 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 30.9500.
+
+Wed Jul  8 13:14:32 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 9. The simulation is unstable. Time = 31.5700.
+
+Wed Jul  8 13:16:11 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 31.1600.
+
+Wed Jul  8 13:17:21 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 31.1600.
+
+Wed Jul  8 13:28:55 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 7. The simulation is unstable. Time = 37.6550.
+
+Wed Jul  8 13:28:55 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 17. The simulation is unstable. Time = 0.0200.
+
+Wed Jul  8 13:28:55 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0200.
+
+Wed Jul  8 13:28:55 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 11. The simulation is unstable. Time = 0.0200.
+
+Wed Jul  8 13:28:55 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:28:55 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 17. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:28:55 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:28:56 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 10. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:28:56 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:28:56 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 12. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:28:56 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:44 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 38.5550.
+
+Wed Jul  8 13:30:44 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 11. The simulation is unstable. Time = 0.0300.
+
+Wed Jul  8 13:30:44 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0300.
+
+Wed Jul  8 13:30:44 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 6. The simulation is unstable. Time = 0.0300.
+
+Wed Jul  8 13:30:44 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0250.
+
+Wed Jul  8 13:30:45 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0200.
+
+Wed Jul  8 13:30:45 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:45 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 10. The simulation is unstable. Time = 0.0200.
+
+Wed Jul  8 13:30:45 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:45 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 5. The simulation is unstable. Time = 0.0200.
+
+Wed Jul  8 13:30:45 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:46 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 11. The simulation is unstable. Time = 0.0200.
+
+Wed Jul  8 13:30:46 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:46 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0200.
+
+Wed Jul  8 13:30:46 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:47 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 10. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:47 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 5. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:47 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 11. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:47 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 4. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:47 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 11. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:47 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:47 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 17. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:47 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:47 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 17. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:47 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:47 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 10. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:47 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:47 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 11. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:47 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 10. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 12. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 11. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 17. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 8. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 11. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 14. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 16. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 6. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 10. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 6. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 6. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 12. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 17. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 11. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:48 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:49 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 10. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:49 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 4. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:49 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 16. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:49 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 7. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:49 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 12. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:49 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 12. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:49 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 6. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:49 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:49 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 10. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:49 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:50 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:50 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:51 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:51 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:52 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 11. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:52 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 12. The simulation is unstable. Time = 0.0100.
+
+Wed Jul  8 13:30:52 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 10. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:52 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:52 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 11. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:52 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:54 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:54 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:54 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 6. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:54 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:54 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:54 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:54 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 10. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:54 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:54 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 10. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:54 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:54 2020
+WARNING: Nan, Inf or huge value in QVEL at DOF 6. The simulation is unstable. Time = 0.0150.
+
+Wed Jul  8 13:30:54 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0150.
+
+Thu Aug 27 22:24:06 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 17. The simulation is unstable. Time = 13.7450.
+
+Thu Aug 27 23:00:39 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 2.8350.
+
+Thu Aug 27 23:02:29 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 3.3750.
+
+Thu Aug 27 23:02:50 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 3.1950.
+
+Fri Aug 28 08:50:16 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 4. The simulation is unstable. Time = 3.6400.
+
+Fri Aug 28 09:15:51 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 4.7950.
+
+Fri Aug 28 09:29:21 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 5. The simulation is unstable. Time = 2.8900.
+
+Fri Aug 28 09:30:43 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 11. The simulation is unstable. Time = 2.8900.
+
+Fri Aug 28 09:31:24 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 2.5400.
+
+Fri Aug 28 09:34:51 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 2.5550.
+
+Fri Aug 28 09:45:53 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 2.5550.
+
+Fri Aug 28 09:46:59 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 2.5550.
+
+Fri Aug 28 09:47:25 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 2.5550.
+
+Fri Aug 28 09:48:42 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 10. The simulation is unstable. Time = 2.5500.
+
+Fri Aug 28 10:02:39 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 2.5550.
+
+Fri Aug 28 10:53:21 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 5.8000.
+
+Fri Aug 28 10:54:58 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 5.5000.
+
+Fri Aug 28 11:56:37 2020
+WARNING: Nan, Inf or huge value in QACC at DOF 11. The simulation is unstable. Time = 33.4150.
+

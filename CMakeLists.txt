@@ -25,6 +25,7 @@ message(STATUS "MuJoCo lib: " ${LIB_MUJOCO})
 
 find_package(OpenGL)
 find_package(Eigen3)
+find_package(OsqpEigen)#ADDED
 
 file(GLOB LIB_GLFW3 ${CMAKE_CURRENT_SOURCE_DIR}/libraries/libglfw.so.3)
 
@@ -47,3 +48,4 @@ target_link_libraries(basic ${LIB_MUJOCO} GL GLU glew ${LIB_GLFW3})
 target_link_libraries(balancerWrench ${LIB_MUJOCO} GL GLU glew ${LIB_GLFW3} eigenUtils)
 
 target_link_libraries(simulate ${LIB_MUJOCO} GL GLU glew ${LIB_GLFW3} utils)
+target_link_libraries(balancerWrench OsqpEigen::OsqpEigen)#added
