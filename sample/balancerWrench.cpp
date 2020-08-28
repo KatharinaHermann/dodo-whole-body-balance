@@ -358,28 +358,9 @@ void controllerCallback(const mjModel* m, mjData* d)
         P_S = P.sparseView();
 
         VectorXd q = VectorXd::Zero(12);
-        //q=(F_COM.transpose())*Q*G;
         q=(G.transpose())*Q*F_COM;
 
-        /*
-        VectorXd u = VectorXd::Zero(4);
-        u << 10000, 10000, 0, 0;
 
-        VectorXd l = VectorXd::Zero(4);
-        l << 0, 0, -10000, -10000;
-
-        const double my = 0.1;
-
-        SparseMatrix<float> A(4,12);
-        A.insert(0,2) = 1;
-        A.insert(1,8) = 1;
-        A.insert(2,0) = 1;
-        A.insert(2,1) = 1;
-        A.insert(2,2) = -0.1;
-        A.insert(3,6) = 1;
-        A.insert(3,7) = 1;
-        A.insert(3,8) = -0.1;
-        */
 
         VectorXd u = VectorXd::Zero(6);
         u << 10000000, 0, 10000000, 10000000, 0, 10000000;
@@ -394,7 +375,7 @@ void controllerCallback(const mjModel* m, mjData* d)
 
         A.insert(1,0) = 1;
         A.insert(1,1) = 1;
-        A.insert(1,2) = -my; //-0.07071;
+        A.insert(1,2) = -my;
 
         A.insert(4,6) = 1;
         A.insert(4,7) = 1;
